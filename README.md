@@ -7,7 +7,7 @@ app.js runs the node server and express routing. Also handles the connection to 
 	npm start - kicks off mongodb connection and host node.js web server with express routing
 		http://localhost:10010
 	npm install - installs dependencies for node server
-	npm run test - kicks off unit testing for the node server
+	npm run test - kicks off Mocha+Chai unit testing for the node server
 	swagger project edit - opens up OpenAPI spec to edit/test request/responses
 	
 	Express Routing
