@@ -30,3 +30,4 @@ build/Release
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+config.js

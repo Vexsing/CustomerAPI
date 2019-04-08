@@ -7,8 +7,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./api/controllers/customer');
 const mongoose = require('mongoose');
+const dbconfig = require('./config');
 
-mongoose.connect("mongodb+srv://admin:NXAt5f81DhxB8ERK@jpmc-api-n14sm.mongodb.net/test?retryWrites=true", { useNewUrlParser: true})
+mongoose.connect(dbconfig.mongodb, { useNewUrlParser: true})
 mongoose.set('useCreateIndex', true);
 
 const db = mongoose.connection;
