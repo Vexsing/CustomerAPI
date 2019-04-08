@@ -1,0 +1,224 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Customer Data API
+  description: A simple RESTful API to emulate customer data management.
+
+host: localhost:10010
+
+basePath: /
+
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+
+produces:
+  - application/json
+  
+  
+  
+paths:
+
+
+  /customers:
+    x-swagger-router-controller: customer
+    
+    get:
+      description: get all customers.
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customers"
+            
+        "500":
+          description: an unexpected error occured.
+            
+    post:
+      description: add a customer.
+      
+      parameters:
+        - name: customer
+          description: customer that is being created.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+            
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+            
+        "400":
+          description: invalid Customer object created.
+            
+        "500":
+          description: an unexpected error occured.
+
+
+  /customers/id/{id}:
+    x-swagger-router-controller: customer
+    
+    get:
+      description: get a customer information on id.
+      
+      parameters:
+        - $ref: "#/parameters/id"
+      
+      responses: 
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+            
+        "404":
+          description: a customer with that id does not exist.
+        
+            
+            
+    put:
+      description: updates a customer's phone number on id.
+      
+      parameters:
+        - $ref: "#/parameters/id"
+        - $ref: "#/parameters/newphone"
+      
+      responses: 
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+            
+        "400":
+          description: invalid phone number.
+            
+        "404":
+          description: a customer with that id does not exist.
+            
+        "500":
+          description: an unexpected error occured.
+          
+          
+    delete:
+      description: removes a customer with given id.
+      
+      parameters:
+        - $ref: "#/parameters/id"
+          
+      responses:
+      
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+        
+        "404":
+          description: a customer with that id does not exist.
+          
+        "500":
+          description: an unexpected error occured
+  
+  
+  /customers/phone/{phone}:
+    x-swagger-router-controller: customer
+   
+    get:
+      description: get a customer's information on phone number
+      
+      parameters:
+        - $ref: "#/parameters/phone"
+      responses: 
+      
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+            
+        "404":
+          description: a customer with that phone number does not exist.
+          
+        "500":
+          description: an unexpected error occured  
+            
+            
+            
+definitions:
+
+  Customer:
+      
+    properties:
+      #_id:
+        #type: string
+        
+      name:
+        type: string
+        maxLength: 100
+        
+      address:
+        type: string
+        maxLength: 255
+        
+      phone:
+        type: string
+        example: 555-555-5555
+        maxLength: 12
+        pattern: '^\d{3}?[\s.-]?\d{3}[\s.-]?\d{4}$'
+        
+      email:
+        type: string
+        example: example@example.com
+        maxLength: 100
+        format: email
+        
+      dob:
+        type: string
+        example: 01/01/01
+        maxLength: 8
+        pattern: '^(0[1-9]|1[012])[-\s\/.](0[1-9]|[12][0-9]|3[01])[-\s\/.][0-9]{2}$'
+          
+  Customers:
+    type: array
+    items:
+      $ref: "#/definitions/Customer"
+  
+  CustomerNewPhone:
+      
+    properties:
+        
+      phone:
+        type: string
+        example: 555-555-5555
+        maxLength: 12
+        pattern: '^\d{3}?[\s.-]?\d{3}[\s.-]?\d{4}$'
+
+    
+parameters:
+
+  id:
+    name: id
+    in: path
+    required: true
+    description: the customer's id value.
+    type: string
+    
+  phone:
+    name: phone
+    in: path
+    required: true
+    description: the customer's phone number.
+    type: string
+    
+  newphone:
+    name: phone
+    in: body
+    required: true
+    description: the customer's updated phone number
+    schema:
+      $ref: "#/definitions/CustomerNewPhone"
+  

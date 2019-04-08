@@ -1,0 +1,29 @@
+{
+  "name": "customer-data",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Customer Data API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.12.3",
+    "mocha": "^6.1.0",
+    "mongoose": "^5.4.22",
+    "nodemon": "^1.18.10",
+    "swagger-express-mw": "^0.1.0"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha api/tests/"
+  }
+}

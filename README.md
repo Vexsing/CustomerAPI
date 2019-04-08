@@ -1,1 +1,1 @@
-# CustomerAPI
+# Skeleton project for Swagger
